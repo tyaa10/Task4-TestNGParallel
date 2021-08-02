@@ -12,6 +12,7 @@ import pages.AddToCartPage;
 import pages.HomePage;
 import pages.LaptopsPage;
 import pages.SumCheckingPage;
+import util.StringToNumberConverter;
 import util.WebDriverSingletone;
 import util.XMLtoObject;
 
@@ -56,17 +57,18 @@ public class SumVerifyTest {
             System.out.println("Product Id: " + rozetkaFilter.getId());
             WebDriver webDriver = webDriverSingletone.getDriver();
             WebDriverWait wait = new WebDriverWait(webDriver, 50);
-            new HomePage(webDriver).searchByKeyword(rozetkaFilter.getProductGroup());
-            new LaptopsPage(webDriver).searchByKeyword(rozetkaFilter.getBrand());
-            new LaptopsPage(webDriver).clickOnBrand1();
-            new LaptopsPage(webDriver).chooseElementOptions();
-            wait.until(
-                    driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
-            new LaptopsPage(webDriver).chooseMostExpensiveDevice();
-            new AddToCartPage(webDriver).pressButtonBuy();
-            wait.until(
-                    driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
-            Assert.assertTrue(new SumCheckingPage(webDriver).checkProductSum(rozetkaFilter.getSum()));
+            String orderPriceTotal = new HomePage(webDriver)
+                .searchByKeyword(rozetkaFilter.getProductGroup())
+                .filterByBrand(rozetkaFilter.getBrand())
+                .sortThings("От дорогих к дешевым")
+                .chooseMostExpensiveGood()
+                .pressButtonBuy()
+                .getOrderPriceTotal();
+            System.out.println("orderPriceTotal Text: " + orderPriceTotal);
+            int actualOrderPriceTotal = StringToNumberConverter.parsePrice(orderPriceTotal, "₴");
+            System.out.println("actualOrderPriceTotal: " + actualOrderPriceTotal);
+            int expectedOrderPriceTotalMaxBound = rozetkaFilter.getSum();
+            Assert.assertTrue(actualOrderPriceTotal < expectedOrderPriceTotalMaxBound);
         }
 
         @AfterMethod

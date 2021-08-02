@@ -1,10 +1,16 @@
 package pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import util.WebDriverSingletone;
+
+import java.awt.*;
 
 public class AddToCartPage {
 
@@ -19,7 +25,20 @@ public class AddToCartPage {
         PageFactory.initElements(webDriver, this);
     }
 
-    public void pressButtonBuy (){
+    public SumCheckingPage pressButtonBuy() {
+        /* try {
+            Robot robot = new Robot();
+            robot.mouseMove(0,0);
+        } catch (AWTException ignored) {}
+        WebDriverWait wait = new WebDriverWait(webDriver, 50);
+        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", buttonBuy); */
+        Actions actions = new Actions(webDriver);
+        actions.moveToElement(buttonBuy).perform();
+        WebDriverWait wait = new WebDriverWait(webDriver, 50);
+        wait.until(ExpectedConditions.visibilityOf(buttonBuy));
         buttonBuy.click();
+        wait.until(
+            driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        return new SumCheckingPage(webDriver);
     }
 }

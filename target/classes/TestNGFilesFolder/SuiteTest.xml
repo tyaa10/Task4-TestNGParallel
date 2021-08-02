@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name = "RozetkaSuite" data-provider-thread-count="3">
+<suite name = "RozetkaSuite" thread-count="3" data-provider-thread-count="3">
     <test name = "testSuiteRozetka">
         <classes>
         <class name = "labTest.SumVerifyTest">

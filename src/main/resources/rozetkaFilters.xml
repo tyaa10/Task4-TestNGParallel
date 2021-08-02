@@ -2,20 +2,20 @@
 <rozetkaFilters>
     <rozetkaFilter>
         <id>1</id>
-        <productGroup>Laptop</productGroup>
+        <productGroup>Ноутбуки</productGroup>
         <brand>HP</brand>
-        <sum>50000</sum>
+        <sum>500000</sum>
     </rozetkaFilter>
     <rozetkaFilter>
         <id>2</id>
-        <productGroup>Laptop</productGroup>
+        <productGroup>Ноутбуки</productGroup>
         <brand>Acer</brand>
-        <sum>50000</sum>
+        <sum>500000</sum>
     </rozetkaFilter>
     <rozetkaFilter>
         <id>3</id>
-        <productGroup>Laptop</productGroup>
+        <productGroup>Ноутбуки</productGroup>
         <brand>Apple</brand>
-        <sum>50000</sum>
+        <sum>500000</sum>
     </rozetkaFilter>
 </rozetkaFilters>
