@@ -13,8 +13,9 @@ public class AddToCartPage {
 
     private WebDriver webDriver;
 
-    public AddToCartPage() {
-        WebDriver webDriver = WebDriverSingletone.getDriver();
+    public AddToCartPage(WebDriver webDriver) {
+        // WebDriver webDriver = WebDriverSingletone.getDriver();
+        this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 

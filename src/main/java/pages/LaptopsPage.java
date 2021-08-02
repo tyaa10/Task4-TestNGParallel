@@ -34,8 +34,9 @@ public class LaptopsPage{
 
     private WebDriver webDriver;
 
-    public LaptopsPage() {
-        WebDriver webDriver = WebDriverSingletone.getDriver();
+    public LaptopsPage(WebDriver webDriver) {
+        this.webDriver = webDriver;
+        // WebDriver webDriver = WebDriverSingletone.getDriver();
         PageFactory.initElements(webDriver, this);
     }
 

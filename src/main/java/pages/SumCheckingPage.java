@@ -8,25 +8,23 @@ import util.WebDriverSingletone;
 
 public class SumCheckingPage {
 
+    private WebDriver webDriver;
+
     @FindBy(xpath = "//div[@class='cart-receipt__sum-price']")
     private WebElement price;
 
-    public SumCheckingPage() {
-        WebDriver webDriver = WebDriverSingletone.getDriver();
+    public SumCheckingPage(WebDriver webDriver) {
+        // WebDriver webDriver = WebDriverSingletone.getDriver();
+        this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
     public boolean checkProductSum(int sum) {
-
         int result;
         String strPrice = price.getText();
         strPrice = strPrice.substring(0, strPrice.length() - 2);
         result = Integer.parseInt(strPrice);
-
-        if (result > 50000) {
-            return true;
-        } else
-            return false;
+        return result > sum;
     }
 }
 

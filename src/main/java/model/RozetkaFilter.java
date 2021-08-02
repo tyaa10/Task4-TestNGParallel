@@ -2,12 +2,12 @@ package model;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "rozetkaFilter")
-
-public class RozetkaFilter {
+public class RozetkaFilter  implements Serializable {
 
     private int id;
     private String productGroup;

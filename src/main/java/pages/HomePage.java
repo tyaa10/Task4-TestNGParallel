@@ -12,8 +12,10 @@ public class HomePage {
 
     private WebDriver webDriver;
 
-    public HomePage() {
-        WebDriver webDriver = WebDriverSingletone.getDriver();
+    public HomePage(WebDriver webDriver) {
+        // WebDriver webDriver = WebDriverSingletone.getDriver();
+        System.out.println("HomePage T: " + Thread.currentThread().getName());
+        this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
