@@ -32,7 +32,7 @@ public class SumVerifyTest {
         public void testsSetUp() {
             System.out.println("testsSetUp T: " + Thread.currentThread().getName());
             WebDriver webDriver = webDriverSingletone.getDriver();
-            webDriver.manage().window().maximize();
+            // webDriver.manage().window().maximize();
             webDriver.get("https://rozetka.com.ua/");
         }
 

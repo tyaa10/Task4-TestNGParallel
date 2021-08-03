@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <rozetkaFilters>
-    <!--<rozetkaFilter>
+    <rozetkaFilter>
         <id>1</id>
         <productGroup>Ноутбуки</productGroup>
         <brand>HP</brand>
@@ -23,11 +23,11 @@
         <productGroup>Ноутбуки</productGroup>
         <brand>Fujitsu</brand>
         <sum>500000</sum>
-    </rozetkaFilter>-->
-    <rozetkaFilter>
+    </rozetkaFilter>
+    <!--<rozetkaFilter>
         <id>5</id>
         <productGroup>Ноутбуки и компьютеры</productGroup>
         <brand>Fujitsu</brand>
         <sum>500000</sum>
-    </rozetkaFilter>
+    </rozetkaFilter>-->
 </rozetkaFilters>

@@ -2,6 +2,7 @@ package util;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,7 +30,9 @@ public class WebDriverSingletone {
         String driverName = new PropertiesReader().getDriverName();
         String driverLocation = new PropertiesReader().getDriverLocation();
         System.setProperty(driverName, driverLocation);
-        driver = new ChromeDriver() {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        driver = new ChromeDriver(options) {
             {
                 manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             }

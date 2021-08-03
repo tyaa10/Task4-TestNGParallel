@@ -6,15 +6,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import util.WebDriverSingletone;
-
-import java.util.List;
 
 public class LaptopsPage{
 
     // @FindBy(xpath = "//div[@data-filter-name='producer']//input[@name='searchline']")
     @FindBy(xpath = "//div[@data-filter-name='producer']")
     private WebElement brandSearchBlock;
+
+    private By firstGoodLocator =
+        By.xpath("(//a[@class='goods-tile__picture ng-star-inserted'])[1]");
 
     /* @FindBy(xpath = "//a[@class='checkbox-filter__link']//label[contains(text(),'HP')]")
     private WebElement brand1;
@@ -46,12 +46,14 @@ public class LaptopsPage{
     }
 
     private LaptopsPage filterBrandsByKeyword (final String keyword) {
+        WebDriverWait wait = new WebDriverWait(webDriver, 5);
         WebElement brandSearchInputElement =
             brandSearchBlock.findElement(By.xpath("//input[@name='searchline']"));
+        wait.until(ExpectedConditions.elementToBeClickable(brandSearchInputElement));
         brandSearchInputElement.sendKeys(keyword);
-        WebDriverWait wait = new WebDriverWait(webDriver, 50);
-        wait.until(
-            driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        try {
+            wait.until(ExpectedConditions.stalenessOf(brandSearchBlock));
+        } catch (TimeoutException ignored) {}
         return new LaptopsPage(webDriver);
     }
 
@@ -69,12 +71,18 @@ public class LaptopsPage{
     }
 
     public LaptopsPage sortThings(String orderText) {
+        WebDriverWait wait = new WebDriverWait(webDriver, 5);
+        WebElement firstGood = webDriver.findElement(
+            By.xpath(
+                "(//a[@class='goods-tile__picture ng-star-inserted'])[1]"
+            )
+        );
         Select sortSelect =
             new Select(webDriver.findElement(By.xpath("//rz-sort/select")));
         sortSelect.selectByVisibleText(orderText);
-        WebDriverWait wait = new WebDriverWait(webDriver, 50);
-        wait.until(
-            driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        try {
+            wait.until(ExpectedConditions.stalenessOf(firstGood));
+        } catch (TimeoutException ignored) {}
         return new LaptopsPage(webDriver);
     }
 
@@ -84,11 +92,7 @@ public class LaptopsPage{
                 "(//a[@class='goods-tile__picture ng-star-inserted'])[1]"
             )
         );
-        WebDriverWait wait = new WebDriverWait(webDriver, 50);
-        wait.until(ExpectedConditions.visibilityOf(mostExpensiveGood));
         mostExpensiveGood.click();
-        wait.until(
-            driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
         return new AddToCartPage(webDriver);
     }
 }
