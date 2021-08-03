@@ -46,11 +46,12 @@ public class LaptopsPage{
     }
 
     private LaptopsPage filterBrandsByKeyword (final String keyword) {
-        WebDriverWait wait = new WebDriverWait(webDriver, 5);
+        WebDriverWait wait = new WebDriverWait(webDriver, 50);
         WebElement brandSearchInputElement =
             brandSearchBlock.findElement(By.xpath("//input[@name='searchline']"));
         wait.until(ExpectedConditions.elementToBeClickable(brandSearchInputElement));
         brandSearchInputElement.sendKeys(keyword);
+        wait = new WebDriverWait(webDriver, 5);
         try {
             wait.until(ExpectedConditions.stalenessOf(brandSearchBlock));
         } catch (TimeoutException ignored) {}
@@ -87,11 +88,13 @@ public class LaptopsPage{
     }
 
     public AddToCartPage chooseMostExpensiveGood() {
+        WebDriverWait wait = new WebDriverWait(webDriver, 50);
         WebElement mostExpensiveGood = webDriver.findElement(
             By.xpath(
                 "(//a[@class='goods-tile__picture ng-star-inserted'])[1]"
             )
         );
+        wait.until(ExpectedConditions.visibilityOf(mostExpensiveGood));
         mostExpensiveGood.click();
         return new AddToCartPage(webDriver);
     }
