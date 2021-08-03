@@ -52,11 +52,10 @@ public class SumVerifyTest {
 
 
         @Test(dataProvider = "products")
-        public void verifySum (RozetkaFilter rozetkaFilter){
+        public void givenFilter_whenTheMostExpensiveProductAddedToCart_thenTotalPriceLessThanBound (RozetkaFilter rozetkaFilter){
             System.out.println("verifySum T: " + Thread.currentThread().getName());
             System.out.println("Product Id: " + rozetkaFilter.getId());
             WebDriver webDriver = webDriverSingletone.getDriver();
-            WebDriverWait wait = new WebDriverWait(webDriver, 50);
             String orderPriceTotal = new HomePage(webDriver)
                 .searchByKeyword(rozetkaFilter.getProductGroup())
                 .filterByBrand(rozetkaFilter.getBrand())

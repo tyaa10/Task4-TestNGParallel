@@ -38,7 +38,6 @@ public class LaptopsPage{
 
     public LaptopsPage(WebDriver webDriver) {
         this.webDriver = webDriver;
-        // WebDriver webDriver = WebDriverSingletone.getDriver();
         PageFactory.initElements(webDriver, this);
     }
 
@@ -63,6 +62,8 @@ public class LaptopsPage{
                     String.format("//label[contains(text(),'%s')]", brandName)
                 )
             );
+        WebDriverWait wait = new WebDriverWait(webDriver, 50);
+        wait.until(ExpectedConditions.visibilityOf(brandSearchLabelElement));
         brandSearchLabelElement.click();
         return new LaptopsPage(webDriver);
     }
