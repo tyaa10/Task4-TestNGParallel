@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import util.DomHelpers;
 
 public class LaptopsPage{
 
@@ -47,37 +48,45 @@ public class LaptopsPage{
 
     private LaptopsPage filterBrandsByKeyword (final String keyword) {
         WebDriverWait wait = new WebDriverWait(webDriver, 50);
+        WebDriverWait waitForUpdate = new WebDriverWait(webDriver, 15);
         WebElement brandSearchInputElement =
+            brandSearchBlock.findElement(By.xpath("//input[@name='searchline']"));
+        try {
+            waitForUpdate.until(ExpectedConditions.stalenessOf(brandSearchInputElement));
+        } catch (TimeoutException ignored) {}
+        brandSearchInputElement =
             brandSearchBlock.findElement(By.xpath("//input[@name='searchline']"));
         wait.until(ExpectedConditions.elementToBeClickable(brandSearchInputElement));
         brandSearchInputElement.sendKeys(keyword);
-        wait = new WebDriverWait(webDriver, 5);
         try {
-            wait.until(ExpectedConditions.stalenessOf(brandSearchBlock));
+            waitForUpdate.until(ExpectedConditions.stalenessOf(brandSearchBlock));
         } catch (TimeoutException ignored) {}
         return new LaptopsPage(webDriver);
     }
 
     private LaptopsPage selectBrand (final String brandName) {
-        WebElement brandSearchLabelElement =
+        brandSearchBlock = webDriver.findElement(By.xpath("//div[@data-filter-name='producer']"));
+        /* WebElement brandSearchLabelElement =
             brandSearchBlock.findElement(
                 By.xpath(
                     String.format("//label[contains(text(),'%s')]", brandName)
                 )
+            ); */
+        WebElement brandSearchLabelElement =
+            DomHelpers.waitForElementToBeRefreshedAndClickable(
+                webDriver,
+                brandSearchBlock,
+                By.xpath(
+                    String.format("//label[contains(text(),'%s')]", brandName)
+                )
             );
-        WebDriverWait wait = new WebDriverWait(webDriver, 50);
-        wait.until(ExpectedConditions.visibilityOf(brandSearchLabelElement));
         brandSearchLabelElement.click();
         return new LaptopsPage(webDriver);
     }
 
     public LaptopsPage sortThings(String orderText) {
-        WebDriverWait wait = new WebDriverWait(webDriver, 5);
-        WebElement firstGood = webDriver.findElement(
-            By.xpath(
-                "(//a[@class='goods-tile__picture ng-star-inserted'])[1]"
-            )
-        );
+        WebDriverWait wait = new WebDriverWait(webDriver, 15);
+        WebElement firstGood = webDriver.findElement(firstGoodLocator);
         Select sortSelect =
             new Select(webDriver.findElement(By.xpath("//rz-sort/select")));
         sortSelect.selectByVisibleText(orderText);
@@ -89,12 +98,10 @@ public class LaptopsPage{
 
     public AddToCartPage chooseMostExpensiveGood() {
         WebDriverWait wait = new WebDriverWait(webDriver, 50);
-        WebElement mostExpensiveGood = webDriver.findElement(
-            By.xpath(
-                "(//a[@class='goods-tile__picture ng-star-inserted'])[1]"
-            )
-        );
-        wait.until(ExpectedConditions.visibilityOf(mostExpensiveGood));
+        // WebElement mostExpensiveGood = webDriver.findElement(firstGoodLocator);
+        // wait.until(ExpectedConditions.elementToBeClickable(mostExpensiveGood));
+        WebElement mostExpensiveGood =
+            DomHelpers.waitForElementToBeRefreshedAndClickable(webDriver, firstGoodLocator);
         mostExpensiveGood.click();
         return new AddToCartPage(webDriver);
     }
