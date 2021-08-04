@@ -1,5 +1,6 @@
 package pages;
 
+import decorator.custom.webelements.Button;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,33 +13,17 @@ import util.WebDriverSingletone;
 
 import java.awt.*;
 
-public class AddToCartPage {
+public class AddToCartPage extends AbstractPage {
 
     @FindBy(xpath = "//button[@class='buy-button button button_with_icon button_color_green button_size_large ng-star-inserted']")
-    private WebElement buttonBuy;
+    private Button buttonBuy;
 
-    private WebDriver webDriver;
-
-    public AddToCartPage(WebDriver webDriver) {
-        // WebDriver webDriver = WebDriverSingletone.getDriver();
-        this.webDriver = webDriver;
-        PageFactory.initElements(webDriver, this);
+    public AddToCartPage(WebDriver driver) {
+        super(driver);
     }
 
     public SumCheckingPage pressButtonBuy() {
-        /* try {
-            Robot robot = new Robot();
-            robot.mouseMove(0,0);
-        } catch (AWTException ignored) {}
-        WebDriverWait wait = new WebDriverWait(webDriver, 50);
-        ((JavascriptExecutor) webDriver).executeScript("arguments[0].scrollIntoView(true);", buttonBuy); */
-        Actions actions = new Actions(webDriver);
-        actions.moveToElement(buttonBuy).perform();
-        WebDriverWait wait = new WebDriverWait(webDriver, 50);
-        wait.until(ExpectedConditions.visibilityOf(buttonBuy));
-        buttonBuy.click();
-        wait.until(
-            driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
-        return new SumCheckingPage(webDriver);
+        buttonBuy.moveToAndSafeClick(15);
+        return new SumCheckingPage(driver);
     }
 }
