@@ -1,5 +1,6 @@
 package labTest;
 
+import global.Facade;
 import model.RozetkaFilter;
 import model.RozetkaFilters;
 import org.openqa.selenium.JavascriptExecutor;
@@ -56,18 +57,22 @@ public class SumVerifyTest {
             System.out.println("verifySum T: " + Thread.currentThread().getName());
             System.out.println("Product Id: " + rozetkaFilter.getId());
             WebDriver webDriver = webDriverSingletone.getDriver();
-            String orderPriceTotal = new HomePage(webDriver)
+            /* String orderPriceTotal = new HomePage(webDriver)
                 .searchByKeyword(rozetkaFilter.getProductGroup())
                 .filterByBrand(rozetkaFilter.getBrand())
                 .sortThings("От дорогих к дешевым")
                 .chooseMostExpensiveGood()
                 .pressButtonBuy()
-                .getOrderPriceTotal();
-            System.out.println("orderPriceTotal Text: " + orderPriceTotal);
+                .getOrderPriceTotal(); */
+
+            new Facade(new HomePage(webDriver))
+                .getProductsByCategory(rozetkaFilter.getProductGroup());
+
+            /* System.out.println("orderPriceTotal Text: " + orderPriceTotal);
             int actualOrderPriceTotal = StringToNumberConverter.parsePrice(orderPriceTotal, "₴");
             System.out.println("actualOrderPriceTotal: " + actualOrderPriceTotal);
             int expectedOrderPriceTotalMaxBound = rozetkaFilter.getSum();
-            Assert.assertTrue(actualOrderPriceTotal < expectedOrderPriceTotalMaxBound);
+            Assert.assertTrue(actualOrderPriceTotal < expectedOrderPriceTotalMaxBound); */
         }
 
         @AfterMethod

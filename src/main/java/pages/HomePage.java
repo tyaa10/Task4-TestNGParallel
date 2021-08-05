@@ -17,12 +17,12 @@ public class HomePage extends AbstractPage {
         super(driver);
     }
 
-    private HomePage inputSearchKeyword (final String keyword) {
+    public HomePage inputSearchKeyword (final String keyword) {
         searchField.safeSendKeys(30, keyword);
         return new HomePage(driver);
     }
 
-    private LaptopsPage selectSearchSuggestItem (final String keyword) {
+    public LaptopsPage selectSearchSuggestItem (final String keyword) {
         AbstractElement searchSuggestItemElement =
             new AbstractElement(
                 driver,
@@ -40,7 +40,7 @@ public class HomePage extends AbstractPage {
         return new LaptopsPage(driver);
     }
 
-    public LaptopsPage searchByKeyword (final String keyword) {
+    /* public LaptopsPage searchByKeyword (final String keyword) {
         return inputSearchKeyword(keyword).selectSearchSuggestItem(keyword);
-    }
+    } */
 }

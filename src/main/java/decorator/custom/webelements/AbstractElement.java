@@ -32,7 +32,7 @@ public class AbstractElement implements WebElement {
         );
     }
 
-    public static <T> T performAndWaitForUpdate(
+    /* public static <T> T performAndWaitForUpdate(
         WebDriver driver,
         Callable<T> actionToPerform,
         long timeOutInSeconds
@@ -45,7 +45,7 @@ public class AbstractElement implements WebElement {
                 .equals("complete")
         );
         return result;
-    }
+    } */
 
     public static void performAndWaitForUpdate(
         WebDriver driver,
@@ -60,7 +60,7 @@ public class AbstractElement implements WebElement {
         } catch (TimeoutException ignored) {}
     }
 
-    public static <T> T performAndWaitForUpdate(
+    /* public static <T> T performAndWaitForUpdate(
         WebDriver driver,
         Callable<T> actionToPerform,
         WebElement elementToWaitForUpdate,
@@ -72,7 +72,7 @@ public class AbstractElement implements WebElement {
             wait.until(ExpectedConditions.stalenessOf(elementToWaitForUpdate));
         } catch (TimeoutException ignored) {}
         return result;
-    }
+    } */
 
     public static void performAndWaitForUpdate(
         WebDriver driver,
@@ -84,7 +84,7 @@ public class AbstractElement implements WebElement {
         performAndWaitForUpdate(driver, actionToPerform, elementToWaitForUpdate, timeOutInSeconds);
     }
 
-    public static <T> T performAndWaitForUpdate(
+    /* public static <T> T performAndWaitForUpdate(
         WebDriver driver,
         Callable<T> actionToPerform,
         By locatorToWaitForElementUpdate,
@@ -92,7 +92,7 @@ public class AbstractElement implements WebElement {
     ) throws Exception {
         WebElement elementToWaitForUpdate = driver.findElement(locatorToWaitForElementUpdate);
         return performAndWaitForUpdate(driver, actionToPerform, elementToWaitForUpdate, timeOutInSeconds);
-    }
+    } */
 
     public void safeAction(Runnable actionToPerform, long timeOutInSeconds) {
         try {
@@ -115,7 +115,7 @@ public class AbstractElement implements WebElement {
         safeAction(actionToPerform, timeOutInSeconds);
     }
 
-    public void moveToElementAndSafeAction(
+    /* public void moveToElementAndSafeAction(
         By targetLocator,
         Runnable actionToPerform,
         long timeOutInSeconds
@@ -124,7 +124,7 @@ public class AbstractElement implements WebElement {
         WebElement target = driver.findElement(targetLocator);
         actions.moveToElement(target).perform();
         safeAction(actionToPerform, timeOutInSeconds);
-    }
+    } */
 
     @Override
     public void click() {
