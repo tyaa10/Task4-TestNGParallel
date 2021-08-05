@@ -4,9 +4,6 @@ import decorator.custom.webelements.AbstractElement;
 import decorator.custom.webelements.TextInput;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import util.WebDriverSingletone;
 
 public class HomePage extends AbstractPage {
 
@@ -22,7 +19,7 @@ public class HomePage extends AbstractPage {
         return new HomePage(driver);
     }
 
-    public LaptopsPage selectSearchSuggestItem (final String keyword) {
+    public ProductsPage selectSearchSuggestItem (final String keyword) {
         AbstractElement searchSuggestItemElement =
             new AbstractElement(
                 driver,
@@ -37,10 +34,10 @@ public class HomePage extends AbstractPage {
             searchSuggestItemElement::click,
             15
         );
-        return new LaptopsPage(driver);
+        return new ProductsPage(driver);
     }
 
-    /* public LaptopsPage searchByKeyword (final String keyword) {
+    /* public ProductsPage searchByKeyword (final String keyword) {
         return inputSearchKeyword(keyword).selectSearchSuggestItem(keyword);
     } */
 }

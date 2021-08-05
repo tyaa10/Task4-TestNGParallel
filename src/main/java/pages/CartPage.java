@@ -9,17 +9,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.WebDriverSingletone;
 
-public class SumCheckingPage extends AbstractPage {
+public class CartPage extends AbstractPage {
 
     @FindBy(xpath = "//div[@class='cart-receipt__sum-price']/span")
     private TextBlock price;
 
-    public SumCheckingPage(WebDriver driver) {
+    public CartPage(WebDriver driver) {
         super(driver);
     }
 
-    public String getOrderPriceTotal() {
-        return price.safeGetText(15);
+    public int getOrderPriceTotal() {
+        return Integer.parseInt(price.safeGetText(15));
     }
 }
 

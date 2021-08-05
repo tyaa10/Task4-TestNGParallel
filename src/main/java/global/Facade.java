@@ -1,17 +1,60 @@
 package global;
 
+import pages.CartPage;
 import pages.HomePage;
-import pages.LaptopsPage;
+import pages.ProductPage;
+import pages.ProductsPage;
+import util.WebDriverSingletone;
 
 public class Facade {
 
-    private HomePage homePage;
+    private final WebDriverSingletone webDriverSingletone;
 
-    public Facade(HomePage homePage) {
-        this.homePage = homePage;
+    public Facade() {
+        webDriverSingletone = WebDriverSingletone.getInstance();
     }
 
-    public LaptopsPage getProductsByCategory (final String category) {
-        return homePage.inputSearchKeyword(category).selectSearchSuggestItem(category);
+    public void open(String urlString) {
+        webDriverSingletone.getDriver().get(urlString);
+    }
+
+    public void close() {
+        webDriverSingletone.closeDriver();
+    }
+
+    public Facade filterProductsByCategory (final String category) {
+        new HomePage(webDriverSingletone.getDriver())
+            .inputSearchKeyword(category)
+            .selectSearchSuggestItem(category);
+        return this;
+    }
+
+    public Facade filterProductsByBrand (final String brand) {
+        new ProductsPage(webDriverSingletone.getDriver())
+            .filterBrandsByKeyword(brand).selectBrand(brand);
+        return this;
+    }
+
+    public Facade sortProductsFromExpensive() {
+        new ProductsPage(webDriverSingletone.getDriver())
+            .sortProductsFromExpensive();
+        return this;
+    }
+
+    public Facade chooseFirstProduct() {
+        new ProductsPage(webDriverSingletone.getDriver())
+            .chooseFirstProduct();
+        return this;
+    }
+
+    public Facade addProductToCart() {
+        new ProductPage(webDriverSingletone.getDriver())
+            .pressButtonBuy();
+        return this;
+    }
+
+    public int getCartTotalPrice() {
+        return new CartPage(webDriverSingletone.getDriver())
+            .getOrderPriceTotal();
     }
 }
