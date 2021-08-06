@@ -1,6 +1,7 @@
 package pages;
 
 import decorator.custom.webelements.AbstractElement;
+import decorator.custom.webelements.Button;
 import decorator.custom.webelements.TextInput;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -20,8 +21,8 @@ public class HomePage extends AbstractPage {
     }
 
     public ProductsPage selectSearchSuggestItem (final String keyword) {
-        AbstractElement searchSuggestItemElement =
-            new AbstractElement(
+        Button searchSuggestItemElement =
+            new Button(
                 driver,
                 driver.findElement(
                     By.xpath(
@@ -29,15 +30,7 @@ public class HomePage extends AbstractPage {
                     )
                 )
             ){};
-        AbstractElement.performAndWaitForUpdate(
-            driver,
-            searchSuggestItemElement::click,
-            15
-        );
+        searchSuggestItemElement.safeClickThenWaitForUpdate(15);
         return new ProductsPage(driver);
     }
-
-    /* public ProductsPage searchByKeyword (final String keyword) {
-        return inputSearchKeyword(keyword).selectSearchSuggestItem(keyword);
-    } */
 }

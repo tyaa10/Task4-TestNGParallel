@@ -10,6 +10,13 @@ public class Button extends AbstractElement {
     public void safeClick(long timeOutInSeconds) {
         safeAction(() -> element.click(), timeOutInSeconds);
     }
+    public void safeClickThenWaitForUpdate(long timeOutInSeconds) {
+        performAndWaitForUpdate(
+            driver,
+            () -> this.safeClick(timeOutInSeconds),
+            15
+        );
+    }
     public void moveToAndSafeClick(long timeOutInSeconds) {
         moveToElementAndSafeAction(element, () -> element.click(), timeOutInSeconds);
     }

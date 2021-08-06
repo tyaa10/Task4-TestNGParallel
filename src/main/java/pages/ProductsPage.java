@@ -36,16 +36,27 @@ public class ProductsPage extends AbstractPage {
         return new ProductsPage(driver);
     }
 
-    private ProductsPage sortProductsByValue(String orderText) {
+    private ProductsPage sortProductsByValue(String orderValue) {
         Select sortSelect =
             new Select(driver.findElement(By.xpath("//rz-sort/select")));
         AbstractElement.performAndWaitForUpdate(
             driver,
-            () -> sortSelect.selectByValue(orderText),
+            () -> sortSelect.selectByValue(orderValue),
+            /* new Runnable() {
+                @Override
+                public void run() {
+                    sortSelect.selectByValue(orderValue);
+                }
+            }, */
+            // ProductsPage::fooAction,
             firstProductImageButton,
             15
         );
         return new ProductsPage(driver);
+    }
+
+    private static void fooAction() {
+        // ...
     }
 
     public ProductsPage sortProductsFromExpensive () {
