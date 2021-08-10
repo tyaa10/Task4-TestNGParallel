@@ -3,6 +3,7 @@ package labTest;
 import global.Facade;
 import model.RozetkaFilter;
 import model.RozetkaFilters;
+import model.ValueWrapper;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import util.XMLtoObject;
@@ -39,15 +40,20 @@ public class SumVerifyTest {
 
         @Test(dataProvider = "products")
         public void givenFilter_whenTheMostExpensiveProductAddedToCart_thenTotalPriceLessThanBound (RozetkaFilter rozetkaFilter) throws InterruptedException {
-            int actualOrderPriceTotal =
-                domManipulatorFacade.filterProductsByCategory(rozetkaFilter.getProductGroup())
-                    .filterProductsByBrand(rozetkaFilter.getBrand())
-                    .sortProductsFromExpensive()
-                    .chooseFirstProduct()
-                    .addProductToCart()
-                    .getCartTotalPrice();
+            ValueWrapper<String> productTitleFromProduct = new ValueWrapper<>();
+            ValueWrapper<String> productTitleFromCart = new ValueWrapper<>();
+            ValueWrapper<Integer> cartTotalPrice = new ValueWrapper<>();
+            domManipulatorFacade.filterProductsByCategory(rozetkaFilter.getProductGroup())
+                .filterProductsByBrand(rozetkaFilter.getBrand())
+                .sortProductsFromExpensive()
+                .chooseFirstProduct()
+                .getProductTitleFromProduct(productTitleFromProduct)
+                .addProductToCart()
+                .getProductTitleFromCart(productTitleFromCart)
+                .getCartTotalPrice(cartTotalPrice);
             int expectedOrderPriceTotalMaxBound = rozetkaFilter.getSum();
-            Assert.assertTrue(actualOrderPriceTotal < expectedOrderPriceTotalMaxBound);
+            Assert.assertEquals(productTitleFromCart.value, productTitleFromProduct.value);
+            Assert.assertTrue(cartTotalPrice.value < expectedOrderPriceTotalMaxBound);
         }
 
     @Test(dataProvider = "products")

@@ -6,7 +6,7 @@
         <brand>HP</brand>
         <sum>500000</sum>
     </rozetkaFilter>
-    <!--<rozetkaFilter>
+    <rozetkaFilter>
         <id>2</id>
         <productGroup>Ноутбуки</productGroup>
         <brand>Acer</brand>
@@ -23,7 +23,7 @@
         <productGroup>Ноутбуки</productGroup>
         <brand>Fujitsu</brand>
         <sum>500000</sum>
-    </rozetkaFilter>-->
+    </rozetkaFilter>
     <!--<rozetkaFilter>
         <id>5</id>
         <productGroup>Ноутбуки и компьютеры</productGroup>

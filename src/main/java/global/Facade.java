@@ -1,7 +1,10 @@
 package global;
 
+import model.ValueWrapper;
 import pages.*;
 import util.WebDriverSingletone;
+
+import java.util.Optional;
 
 public class Facade {
 
@@ -50,8 +53,24 @@ public class Facade {
         return this;
     }
 
-    public int getCartTotalPrice() {
-        return new CartPage(webDriverSingletone.getDriver())
-            .getOrderPriceTotal();
+    public Facade getCartTotalPrice(ValueWrapper<Integer> cartTotalPrice) {
+        cartTotalPrice.value =
+            new CartPage(webDriverSingletone.getDriver())
+                .getOrderPriceTotal();
+        return this;
+    }
+
+    public Facade getProductTitleFromProduct(ValueWrapper<String> productTitleFromProduct) {
+        productTitleFromProduct.value =
+            new ProductPage(webDriverSingletone.getDriver())
+                .getTitle();
+        return this;
+    }
+
+    public Facade getProductTitleFromCart(ValueWrapper<String> productTitleFromCart) {
+        productTitleFromCart.value =
+            new CartPage(webDriverSingletone.getDriver())
+                .getTitle();
+        return this;
     }
 }
