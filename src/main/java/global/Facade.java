@@ -1,9 +1,6 @@
 package global;
 
-import pages.CartPage;
-import pages.HomePage;
-import pages.ProductPage;
-import pages.ProductsPage;
+import pages.*;
 import util.WebDriverSingletone;
 
 public class Facade {
@@ -22,8 +19,8 @@ public class Facade {
         webDriverSingletone.closeDriver();
     }
 
-    public Facade filterProductsByCategory (final String category) {
-        new HomePage(webDriverSingletone.getDriver())
+    public Facade filterProductsByCategory (final String category) throws InterruptedException {
+        new BaseSearchablePage(webDriverSingletone.getDriver())
             .inputSearchKeyword(category)
             .selectSearchSuggestItem(category);
         return this;

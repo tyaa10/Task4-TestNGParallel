@@ -5,7 +5,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-public class ProductsPage extends AbstractPage {
+public class ProductsPage extends BaseSearchablePage {
 
     @FindBy(xpath = "//div[@data-filter-name='producer']")
     private Block brandSearchBlock;

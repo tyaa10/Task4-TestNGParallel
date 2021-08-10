@@ -38,7 +38,7 @@ public class SumVerifyTest {
         }
 
         @Test(dataProvider = "products")
-        public void givenFilter_whenTheMostExpensiveProductAddedToCart_thenTotalPriceLessThanBound (RozetkaFilter rozetkaFilter) {
+        public void givenFilter_whenTheMostExpensiveProductAddedToCart_thenTotalPriceLessThanBound (RozetkaFilter rozetkaFilter) throws InterruptedException {
             int actualOrderPriceTotal =
                 domManipulatorFacade.filterProductsByCategory(rozetkaFilter.getProductGroup())
                     .filterProductsByBrand(rozetkaFilter.getBrand())
@@ -49,6 +49,12 @@ public class SumVerifyTest {
             int expectedOrderPriceTotalMaxBound = rozetkaFilter.getSum();
             Assert.assertTrue(actualOrderPriceTotal < expectedOrderPriceTotalMaxBound);
         }
+
+    @Test(dataProvider = "products")
+    public void givenFilter_whenProductsPageSearch_thenSuccess (RozetkaFilter rozetkaFilter) throws InterruptedException {
+        domManipulatorFacade.filterProductsByCategory(rozetkaFilter.getProductGroup())
+            .filterProductsByCategory(rozetkaFilter.getProductGroup());
+    }
 
         @AfterMethod
         public void tearDown() {

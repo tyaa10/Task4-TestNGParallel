@@ -34,7 +34,7 @@ public class WebDriverSingletone {
         options.addArguments("start-maximized");
         driver = new ChromeDriver(options) {
             {
-                manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+                manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
             }
         };
         webDriverThreadLocal.set(driver);

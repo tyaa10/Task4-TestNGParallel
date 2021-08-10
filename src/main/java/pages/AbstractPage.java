@@ -10,7 +10,7 @@ public abstract class AbstractPage {
     protected WebDriver driver;
     public AbstractPage(WebDriver driver) {
         this.driver = driver;
-        WebDriverWait wait = new WebDriverWait(driver, 30);
+        WebDriverWait wait = new WebDriverWait(driver, 15);
         wait.until(
             webDriver -> ((JavascriptExecutor) driver)
                 .executeScript("return document.readyState")
