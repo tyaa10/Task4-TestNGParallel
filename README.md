@@ -7,10 +7,19 @@
 - браузеры Chrome, Firefox
 ## Скачивание и запуск
 - скачать:
+
 **git clone** https://github.com/tyaa10/Task4-TestNGParallel.git
-- запустить все тесты: **mvn test**
+
+- драйверы скачиваются по адресу https://www.selenium.dev/downloads/ и добавляются в каталог _drivers_ (версии драйверов должны соответствовать версиям браузеров), при запуске на OS Windows 10 необходимо добавить фрагмент имени драйвера .exe в строку 4 файла src/main/resources/config.properties
+
+- запустить все тесты:
+
+**mvn test**
+
 - запустить только кейс givenFilter_whenTheMostExpensiveProductAddedToCart_thenTotalPriceLessThanBound в классе SumVerifyTest:
+
 **mvn -Dtest**=SumVerifyTest#givenFilter_whenTheMostExpensiveProductAddedToCart_thenTotalPriceLessThanBound **test**
+
 ## Показаны техники:
 - BDD-именование методов тест-кейсов
 - TestNg
