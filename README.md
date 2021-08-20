@@ -4,6 +4,7 @@
 - OS Windows 10 / Linux Ubuntu 20.04 / Другие современные настольные OS (не проверено)
 - JDK 11 / 15
 - Maven 3.6
+- браузеры Chrome, Firefox
 ## Скачивание и запуск
 - скачать:
 **git clone** https://github.com/tyaa10/Task4-TestNGParallel.git
