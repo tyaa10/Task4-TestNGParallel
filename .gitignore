@@ -38,4 +38,6 @@ out/
 
 ### Custom ###
 *.local
-target
+target/
+.allure
+allure-results

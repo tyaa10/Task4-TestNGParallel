@@ -20,6 +20,10 @@
 
 **mvn -Dtest**=SumVerifyTest#givenFilter_whenTheMostExpensiveProductAddedToCart_thenTotalPriceLessThanBound **test**
 
+- с построением отчета
+
+**mvn -Dtest**=SumVerifyTest#givenFilter_whenTheMostExpensiveProductAddedToCart_thenTotalPriceLessThanBound **clean test allure:report**
+
 ## Показаны техники:
 - BDD-именование методов тест-кейсов
 - TestNg

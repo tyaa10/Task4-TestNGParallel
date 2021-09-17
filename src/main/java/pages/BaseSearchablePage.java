@@ -2,6 +2,7 @@ package pages;
 
 import decorator.custom.webelements.Button;
 import decorator.custom.webelements.TextInput;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -15,11 +16,13 @@ public class BaseSearchablePage extends AbstractPage {
         super(driver);
     }
 
+    @Step("Send '{keyword}' keyword into the search input")
     public BaseSearchablePage inputSearchKeyword (final String keyword) throws InterruptedException {
         searchField.safeSendKeys(30, keyword);
         return new BaseSearchablePage(driver);
     }
 
+    @Step("Select '{keyword}' search suggest item")
     public ProductsPage selectSearchSuggestItem (final String keyword) {
         Button searchSuggestItemElement =
             new Button(
